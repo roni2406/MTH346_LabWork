@@ -1,48 +1,25 @@
-def extendEuclideanAlgorithm(a, b):
-    s = 1
-    s1 = 0
-    t = 0
-    t1 = 1
-    r = a
-    r1 = b
-    
-    while (r1 != 0):
-        q = r // r1
-        r2 = r % r1
-        s2 = s - q * s1
-        t2 = t - q * t1
-        r = r1
-        s = s1
-        t = t1
-        r1 = r2
-        s1 = s2
-        t1 = t2
-    
-    
-    return r, s, t
+from helper import extended_euclid, modular_inverse
 
-def modularInverse(a, m):
-    r, s, t = extendEuclideanAlgorithm(a, m)
-    if (r != 1):
-        return None
-    else:
-        while (s < 0):
-            s += m
-        return s
+# a)
+a = 197654321
+b = 1234567892
+gcd, x, y = extended_euclid(a, b)
+print(f"The answer for 4a: x = {x}, y = {y}, gcd = {gcd}")
 
+# b)
+a = 37
+m = 2023
+try:
+    mod_inv = modular_inverse(a, m)
+    print(f"The answer for 4b: The modular inverse of {a} mod {m} is {mod_inv}")
+except ValueError as e:
+    print(e)
 
-if __name__ == "__main__":
-    # 4 a)
-    r, s, t = extendEuclideanAlgorithm(1234567892, 197654321)
-    print ("Question 4a")
-    print("s:", s)
-    print("t:", t)
-
-    # 4 b)
-    print ("Question43b")
-    r = modularInverse(37, 2023)
-    if (r != None):
-        print("Inverse: ", r)
-    else:
-        print("No inverse")
-    
+# c)
+a = 37 ** 2
+m = 2023 ** 2
+try:
+    mod_inv = modular_inverse(a, m)
+    print(f"The answer for 4c: The modular inverse of {a} mod {m} is {mod_inv}")
+except ValueError as e:
+    print(e)

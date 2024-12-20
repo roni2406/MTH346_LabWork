@@ -1,34 +1,31 @@
-from math import sqrt, ceil
+import math
 
-def powmod(a, b, m):
-    res = 1
-    a %= m
-    while b > 0:
-        if b & 1:
-            res = (res * a) % m
-        a = (a * a) % m
-        b >>= 1
-    return res
+def log_mod(base, value, modulus):
+    x = 0
+    while pow(base, x, modulus) != value and x < modulus:
+        x += 1
+    if x == modulus:
+        raise ValueError("No solution exists")
+    return x
 
-def solve(a, b, m):
-    a %= m
-    b %= m
-    n = ceil(sqrt(m))
+def rdl(p, q, e, gamma, alpha):
+    if e == 1:
+        return log_mod(gamma, alpha, p)
     
-    # Store giant steps
-    vals = {}
-    for p in range(1, n + 1):
-        val = powmod(a, p * n, m)
-        vals[val] = p
-    
-    # Check baby steps
-    for q in range(n + 1):
-        cur = (powmod(a, q, m) * b) % m
-        if cur in vals:
-            ans = vals[cur] * n - q
-            return ans
-            
-    return -1
+    f = 1
+    gamma_power_qe_minus_f = pow(gamma, pow(q, e-f), p)
+    alpha_power_qe_minus_f = pow(alpha, pow(q, e-f), p)
+    u = rdl(p, q, f, gamma_power_qe_minus_f, alpha_power_qe_minus_f)
+    gamma_power_f = pow(gamma, pow(q, f), p)
+    alpha_div_gamma_u = (alpha * pow(pow(gamma, u, p), p-2, p)) % p
+    v = rdl(p, q, e-f, gamma_power_f, alpha_div_gamma_u)
+    return pow(q, f) * v + u
 
-# Test
-print(solve(2, 3, 5))
+def find_discrete_log(base, value, modulus):
+    p = 2027
+    q = 17
+    e = 2
+    return rdl(p, q, e, base, value)
+
+result = find_discrete_log(37, 235, 2027)
+print(result)
