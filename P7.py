@@ -1,41 +1,4 @@
-def mod_inverse(A, M):
-    m0 = M
-    y = 0
-    x = 1
-
-    if (M == 1):
-        return 0
-
-    while (A > 1):
-        # q is quotient
-        q = A // M
-        t = M
-        # m is remainder now, process
-        # same as Euclid's algo
-        M = A % M
-        A = t
-        t = y
-        # Update x and y
-        y = x - q * y
-        x = t
-    # Make x positive
-    if (x < 0):
-        x = x + m0
-
-    return x
-
-def chinese_remainder(congruences):
-  x = 0
-  M = 1
-  for _, mod in congruences:
-    M *= mod
-  
-  for r, mod in congruences:
-    m = M // mod 
-    m_inverse = mod_inverse(m, mod)
-    x += r * m * m_inverse
-
-  return x % M
+from helper import chinese_remainder
 
 def part_a():
   mod1, r1 = 5 ** 4, 363

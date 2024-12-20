@@ -1,28 +1,4 @@
-# Helper functions for modular arithmetic
-from math import gcd
-
-def modular_exponentiation(base, exp, mod):
-    result = 1
-    base = base % mod
-    while exp > 0:
-        if exp % 2 == 1:
-            result = (result * base) % mod
-        base = (base * base) % mod
-        exp //= 2
-    return result
-
-def euler_totient(n):
-    result = n
-    p = 2
-    while p * p <= n:
-        if n % p == 0:
-            while n % p == 0:
-                n //= p
-            result -= result // p
-        p += 1
-    if n > 1:
-        result -= result // n
-    return result
+from helper import euler_totient, modular_exponentiation
 
 # Part a: Find the last 3 digits of 2023^2024
 n_a = 2023

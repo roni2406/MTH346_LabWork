@@ -1,17 +1,4 @@
-def best_approx_rational(r: float, limit: int):
-  terms = []
-  for _ in range(limit):
-    if r == 0:
-      break
-    r = 1/r
-    a = int(r)
-    terms.append(a)
-    r -= a 
-  
-  num, denom = 1, 0
-  for term in reversed(terms):
-    num, denom = denom + term * num, num
-  return denom, num, terms
+from helper import best_approx_rational
 
 rats = [0.372636, 0.373346671, 0.2173836482]
 limit = 10

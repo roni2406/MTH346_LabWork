@@ -1,17 +1,4 @@
-def extended_euclid(a: int, b: int):
-    if b == 0:
-        # Base case
-        return a, 1, 0
-    gcd, x1, y1 = extended_euclid(b, a % b)
-    x = y1
-    y = x1 - (a // b) * y1
-    return gcd, x, y
-
-def modular_inverse(a: int, m: int):
-    gcd, x, _ = extended_euclid(a, m)
-    if gcd != 1:
-        raise ValueError(f"Modular inverse does not exist for a = {a}, m = {m}")
-    return x % m
+from helper import extended_euclid, modular_inverse
 
 # a)
 a = 197654321
