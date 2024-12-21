@@ -17,6 +17,7 @@ def part_c():
   res = chinese_remainder(congruences)
   return res
 
+print("Question 7:")
 res = part_a()
 print("The answer for 7a is", res)
 
@@ -24,4 +25,4 @@ res = part_b()
 print("The answer for 7b is", res)
 
 res = part_c()
-print("The answer for 7c is", res)
+print("The answer for 7c is", res, "\n")

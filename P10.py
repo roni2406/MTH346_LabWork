@@ -28,8 +28,8 @@ def solution_b(n, p):
     h = solving_congruence(a, b, p*p)
     return tmp + h*p
 
-# Output:
 # Question a): a = 492, n = 2023
+print("Question 10:")
 print("x that satisfies x^2 \u2261 492 (mod 2023) is", solution_a(492, 2023))
 # Question b): a = 492, n = 2023*2023
 print("x that satisfies x^2 \u2261 492 (mod 2023^2) is", solution_b(492, 2023))
