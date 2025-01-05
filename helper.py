@@ -66,6 +66,20 @@ def tonelli_shanks(n, p):
         return r
     return 0
 
+def is_prime(n):
+    if n <= 1:
+        return False
+    if n <= 3:
+        return True
+    if n % 2 == 0 or n % 3 == 0:
+        return False
+    i = 5
+    while i * i <= n:
+        if n % i == 0 or n % (i + 2) == 0:
+            return False
+        i += 6
+    return True
+
 def find_sqrt_neg1_mod_p(p):
     """Find m such that m^2 + 1 = 0 (mod p)."""
     if p % 4 != 1:
@@ -86,6 +100,13 @@ def extended_euclid(a: int, b: int):
     if b == 0:
         # Base case
         return a, 1, 0
+    if a < 0 or b < 0:
+        gcd, x1, y1 = extended_euclid(abs(a), abs(b))
+        if a < 0:
+            x1 = -x1
+        if b < 0:
+            y1 = -y1
+        return gcd, x1, y1
     gcd, x1, y1 = extended_euclid(b, a % b)
     x = y1
     y = x1 - (a // b) * y1
@@ -100,13 +121,13 @@ def modular_inverse(a: int, m: int):
 def effective_fermat(p: int):
   if p % 4 != 1 and p != 2:
     return -1, -1
+  ans = []
   for i in range(int(math.sqrt(p) + 1)):
     b_sq = p - i ** 2
     b = int(math.sqrt(b_sq))
     if b * b == b_sq:
-      return i, b
-  return -1, -1
-primes = [2053, 3000017, 1234567913]
+      ans.append((i, b))
+  return ans
 
 def best_approx_rational(r: float, limit: int):
   terms = []
@@ -224,6 +245,8 @@ def solving_congruence(a, b, n):
     b //= d
     n //= d
     a_inv = modular_inverse(a, n)
+    if b < 0:
+        b = b % n
     return (a_inv * b) % n
  
 def prime_factor(n):

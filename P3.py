@@ -1,13 +1,25 @@
-from helper import euclid_algorithm
+from helper import extended_euclid, modular_inverse
 
 print("Question 3: ")
-r = euclid_algorithm(20212019, 909431371)
-print ("3a: GCD of 20212019 and 909431371 is: " + str(r))
+# a)
+a = 1324567892
+b = 187654321
+gcd, x, y = extended_euclid(a, b)
+print(f"4a: x = {x}, y = {y}, gcd = {gcd}")
 
-# 3 b)
-r = euclid_algorithm(12345678, 2345698)
-print ("3b: GCD of 12345678 and 2345698 is: " + str(r))
+# b)
+a = 37
+m = 2024
+mod_inv = modular_inverse(a, m)
+print(f"4b: The modular inverse of {a} mod {m} is {mod_inv}")
 
-# 3 c)
-r = euclid_algorithm(12345675, 567895)
-print ("3c: GCD of 12345675 and 567895 is: " + str(r) + "\n")
+# c)
+a = 37 ** 2
+m = 2024 ** 2
+mod_inv = modular_inverse(a, m)
+print(f"4c: The modular inverse of {a} mod {m} is {mod_inv}\n")
+
+a = -125
+b = -275
+gcd, x, y = extended_euclid(a, b)
+print(f"4c: x = {x}, y = {y}, gcd = {gcd}")

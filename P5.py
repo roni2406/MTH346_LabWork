@@ -1,11 +1,11 @@
-from helper import effective_fermat
-primes = [2053, 3000017, 1234567913]
+from helper import best_approx_rational
+
+rats = [0.269146, 0.513005464 , 0.2173836482]
+limit = 10
 
 print("Question 5: ")
-for p in primes:
-  a, b = effective_fermat(p)
-  if a == -1 and b == -1:
-    print("There is no result for", p)
-  else:
-    print("The result for p =", p, "is a =", a, "and b =", b)
-print(" ")
+for r in rats:
+  num, denom, terms = best_approx_rational(r, limit)
+  print(f"Decimal: {r}")
+  print(f"Continued Fraction Terms: {terms}")
+  print(f"Fraction: {num}/{denom} = {num / denom}\n")

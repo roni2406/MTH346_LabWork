@@ -1,11 +1,11 @@
-from helper import best_approx_rational
+from helper import chinese_remainder
 
-rats = [0.372636, 0.373346671, 0.2173836482]
-limit = 10
 
-print("Question 6: ")
-for r in rats:
-  num, denom, terms = best_approx_rational(r, limit)
-  print(f"Decimal: {r}")
-  print(f"Continued Fraction Terms: {terms}")
-  print(f"Fraction: {num}/{denom} = {num / denom}\n")
+def part():
+  congruences = [(3, 8), (8, 11), (11, 23)]
+  res = chinese_remainder(congruences)
+  return res
+
+print("Question 6:")
+res = part()
+print("The remainder when divide A by 2024 is", res % 2024, "\n")
